@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 
 class SimpleAdapter(
-    private val onCreateViewHolder: (layoutResId: Int, view: View) -> ViewHolder
+    private val onCreateViewHolder: SimpleAdapter.(layoutResId: Int, view: View) -> ViewHolder
 ) : ListAdapter<SimpleAdapterItem<*>, ViewHolder>(ItemCallback()) {
     val items: List<SimpleAdapterItem<*>>
         get() = (0 until itemCount).map(::getItem)
@@ -26,6 +26,6 @@ class SimpleAdapter(
     }
 }
 
-fun adapter(onCreateViewHolder: (layoutResId: Int, view: View) -> ViewHolder): SimpleAdapter {
+fun adapter(onCreateViewHolder: SimpleAdapter.(layoutResId: Int, view: View) -> ViewHolder): SimpleAdapter {
     return SimpleAdapter(onCreateViewHolder)
 }
