@@ -15,7 +15,7 @@ allprojects {
 ### Add library dependency to your project build file
 ```
 dependencies {
-  implementation 'com.github.cregus:simple-recyclerview-adapter:1.0'
+  implementation 'com.github.cregus:simple-recyclerview-adapter:1.0.1'
 }
 ```
 
