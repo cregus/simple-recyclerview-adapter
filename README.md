@@ -15,35 +15,31 @@ allprojects {
 ### Add library dependency to your project build file
 ```
 dependencies {
-  implementation 'com.github.cregus:simple-recyclerview-adapter:1.0.1'
+  implementation 'com.github.cregus:simple-recyclerview-adapter:1.1.0'
 }
 ```
 
 ## Sample usage
 ### Define a class (or classes) for your list items.
 ```kotlin
-data class Header(val label: String) : SimpleAdapterItem<String> {
+data class Header(val label: String) : AdapterItem<String> {
     override val id: String = label
-    override val layoutResId: Int = R.layout.item_header
 }
 
-data class User(override val id: Int, val name: String) : SimpleAdapterItem<Int> {
-    override val layoutResId: Int = R.layout.item_user
-}
+data class User(override val id: Int, val name: String) : AdapterItem<Int>
 ```
 
-### Create adapter.
+### Create adapter using Jetpack View Binding and assign it to your RecyclerView.
 ```kotlin
-val adapter = adapter { layoutResId, view ->
-    when (layoutResId) {
-        R.layout.item_header -> viewHolder<Header>(view) { header ->
-            label.text = header.label
-        }
-        R.layout.item_user -> viewHolder<User>(view) { user ->
-            name.text = user.name
-        }
+val adapter = adapter {
+    register<Header, ItemHeaderBinding> { binding, item, position ->
+        binding.label.text = item.label
+    }
+    register<User, ItemUserBinding> { binding, item, position ->
+        binding.name.text = item.name
     }
 }
+recyclerView.adapter = adapter
 ```
 
 ### Fill it with items.
