@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 29
@@ -11,6 +10,10 @@ android {
         versionCode 2
         versionName "1.0.1"
         setProperty("archivesBaseName", "simple-recyclerview-adapter-$versionName")
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 
     buildTypes {
@@ -25,12 +28,9 @@ android {
     }
 }
 
-androidExtensions {
-    experimental = true
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.4"
 }
